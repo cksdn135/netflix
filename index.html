@@ -1,0 +1,38 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Netflix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="./index.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="wrapper">
+    <section class="main-container" >
+      <h1>Netflix Originals</h1>
+      <div id="movies" class="box"></div>
+  </div>
+
+  <script>
+    const url = 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1';
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhOWI2ZjNiZjE0NjMyYWUxZTU4ODE4NzM3MjM4NWVkNCIsInN1YiI6IjYwMTM4YzVhYzNjODkxMDAzZjQxNzE1MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GFSGuUfVcP720arybp35h5ml_KBYTA9tEIbu9ef2_2k'
+      }
+    };
+
+    fetch(url, options)
+      .then(res => res.json())
+      .then(({ results }) => {
+        document.getElementById("movies").innerHTML = results
+          .map(movie => 
+            `<a href=""><img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt=""></a>`
+          )
+          .join("");
+        }
+      );
+  </script>
+</body>
+</html>
